@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Festivark Restaurant</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* === CSS Variables === */
+        :root {
+            --primary-color: #f37324;
+            --primary-hover: #d9621a;
+            --text-dark: #222;
+            --text-light: #666;
+            --bg-light: #f9f9f9;
+            --bg-dark: #1a1a1a;
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Open Sans', sans-serif;
+        }
+
+        /* === Reset & Base Styles === */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--text-dark);
+            line-height: 1.6;
+            background-color: #fff;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        button, input, select {
+            font-family: inherit;
+            outline: none;
+            border: none;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title span {
+            color: var(--primary-color);
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .section-title h2 {
+            font-family: var(--font-heading);
+            font-size: 36px;
+            color: var(--text-dark);
+        }
+
+        /* === Buttons === */
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: #fff;
+            padding: 12px 28px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 14px;
+            transition: background 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        /* === Top Bar === */
+        .top-bar {
+            background-color: var(--bg-dark);
+            color: #ccc;
+            font-size: 13px;
+            padding: 10px 0;
+        }
+        .top-bar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .top-bar-info {
+            display: flex;
+            gap: 20px;
+        }
+        .top-bar-info i {
+            color: var(--primary-color);
+            margin-right: 8px;
+        }
+
+        /* === Header === */
+        .header {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary-color);
+            line-height: 1;
+        }
+        .logo span {
+            display: block;
+            font-family: var(--font-body);
+            font-size: 10px;
+            color: var(--text-dark);
+            letter-spacing: 4px;
+            font-weight: 600;
+            margin-top: 2px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        .nav-links a {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-dark);
+            transition: color 0.3s;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--primary-color);
+        }
+
+        /* === Hero Section === */
+        .hero {
+            background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 80vh;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            color: #fff;
+        }
+        .hero-content {
+            max-width: 600px;
+        }
+        .hero-content h3 {
+            font-family: var(--font-heading);
+            font-size: 32px;
+            font-weight: 400;
+            margin-bottom: 15px;
+        }
+        .hero-content h1 {
+            font-family: var(--font-heading);
+            font-size: 64px;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        .hero-content p {
+            font-size: 16px;
+            margin-bottom: 30px;
+            color: #eee;
+        }
+
+        /* === About Section === */
+        .about {
+            padding: 100px 0;
+        }
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        .about-img img {
+            border-radius: 0 0 100px 0; /* Curved corner */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .about-text span {
+            color: var(--primary-color);
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        .about-text h2 {
+            font-family: var(--font-heading);
+            font-size: 40px;
+            margin: 15px 0 20px;
+            line-height: 1.2;
+        }
+        .about-text p {
+            color: var(--text-light);
+            margin-bottom: 30px;
+        }
+        .signature {
+            display: flex;
+            flex-direction: column;
+        }
+        .signature-name {
+            font-family: 'Brush Script MT', cursive, var(--font-heading);
+            font-size: 32px;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+        .signature-title {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* === Special Offer === */
+        .special-offer {
+            background-image: linear-gradient(to right, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0) 100%), url('https://images.unsplash.com/photo-1598514982205-f36b96d1e8d4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 80px 0;
+            color: #fff;
+            position: relative;
+        }
+        .special-content {
+            max-width: 500px;
+        }
+        .special-content span {
+            color: var(--primary-color);
+            font-weight: 600;
+            letter-spacing: 2px;
+            font-size: 14px;
+            display: block;
+            margin-bottom: 10px;
+        }
+        .special-content h2 {
+            font-family: var(--font-heading);
+            font-size: 48px;
+            margin-bottom: 15px;
+            line-height: 1.1;
+        }
+        .special-content p {
+            color: #ddd;
+            margin-bottom: 30px;
+            max-width: 400px;
+        }
+        .price-badge {
+            position: absolute;
+            right: 15%;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #fff;
+            color: var(--text-dark);
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 5px solid var(--primary-color);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        .price-badge strong {
+            font-size: 24px;
+            color: var(--primary-color);
+        }
+        .price-badge span {
+            font-size: 12px;
+            color: var(--text-light);
+            letter-spacing: 0;
+            margin: 0;
+        }
+
+        /* === Menu Section === */
+        .menu {
+            padding: 100px 0;
+            background-color: var(--bg-light);
+        }
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        .menu-card {
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+        .menu-card:hover {
+            transform: translateY(-5px);
+        }
+        .menu-card img {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+        }
+        .menu-card-body {
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .menu-card-title {
+            font-weight: 600;
+            font-size: 16px;
+        }
+        .menu-card-price {
+            color: var(--primary-color);
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        /* === Reservation Section === */
+        .reservation {
+            background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            padding: 80px 0;
+            color: #fff;
+        }
+        .reservation-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        .reservation-text span {
+            color: var(--primary-color);
+            font-weight: 600;
+            letter-spacing: 2px;
+            font-size: 14px;
+            display: block;
+            margin-bottom: 10px;
+        }
+        .reservation-text h2 {
+            font-family: var(--font-heading);
+            font-size: 42px;
+            margin-bottom: 15px;
+            line-height: 1.1;
+        }
+        .reservation-text p {
+            color: #ccc;
+        }
+        .reservation-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        .form-group {
+            position: relative;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 15px 20px;
+            border-radius: 4px;
+            background: #fff;
+            color: #333;
+            font-size: 14px;
+            appearance: none;
+        }
+        .form-group i {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+        }
+        .reservation-form .btn {
+            width: 100%;
+            padding: 15px;
+            font-size: 16px;
+            grid-column: span 2;
+        }
+
+        /* === Features Section === */
+        .features {
+            padding: 60px 0;
+            background: #fff;
+            border-bottom: 1px solid #eee;
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            text-align: center;
+        }
+        .feature-item i {
+            font-size: 40px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        .feature-item h3 {
+            font-size: 16px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        .feature-item p {
+            font-size: 13px;
+            color: var(--text-light);
+        }
+
+        /* === Testimonials === */
+        .testimonials {
+            padding: 100px 0;
+            background-color: var(--bg-light);
+        }
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        .testimonial-card {
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border: 1px solid #eee;
+        }
+        .stars {
+            color: #f1c40f;
+            margin-bottom: 15px;
+        }
+        .testimonial-card p {
+            font-size: 14px;
+            color: var(--text-light);
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        .client-name {
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        /* === Blog Section === */
+        .blog {
+            padding: 100px 0;
+        }
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        .blog-card {
+            border: 1px solid #eee;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #fff;
+        }
+        .blog-card img {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+        }
+        .blog-body {
+            padding: 25px;
+        }
+        .blog-body h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+        .blog-body p {
+            font-size: 14px;
+            color: var(--text-light);
+            margin-bottom: 15px;
+        }
+        .blog-date {
+            font-size: 12px;
+            color: #999;
+            font-weight: 600;
+        }
+
+        /* === Footer === */
+        .footer {
+            background-color: var(--bg-dark);
+            color: #aaa;
+            padding: 80px 0 20px;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+        .footer-logo {
+            font-family: var(--font-heading);
+            font-size: 28px;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+        .footer-logo span {
+            display: block;
+            font-family: var(--font-body);
+            font-size: 10px;
+            letter-spacing: 4px;
+            color: #888;
+        }
+        .footer-col p {
+            font-size: 14px;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+        .social-icons a {
+            width: 35px;
+            height: 35px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            transition: 0.3s;
+        }
+        .social-icons a:hover {
+            background: var(--primary-color);
+        }
+        .footer-col h4 {
+            color: #fff;
+            font-size: 16px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+        .footer-col ul li a {
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+        .footer-col ul li a:hover {
+            color: var(--primary-color);
+        }
+        .footer-contact li {
+            display: flex;
+            gap: 15px;
+            font-size: 14px;
+            margin-bottom: 15px;
+            align-items: flex-start;
+        }
+        .footer-contact i {
+            color: var(--primary-color);
+            margin-top: 5px;
+        }
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+        }
+
+        /* === Responsive Design === */
+        @media (max-width: 992px) {
+            .hero-content h1 { font-size: 48px; }
+            .about-grid, .reservation-grid { grid-template-columns: 1fr; gap: 40px; }
+            .about-img { order: -1; }
+            .features-grid { grid-template-columns: repeat(2, 1fr); }
+            .testimonials-grid, .blog-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+            .price-badge { display: none; }
+        }
+
+        @media (max-width: 768px) {
+            .top-bar-info { display: none; }
+            .top-bar .container { justify-content: center; }
+            .nav-links { display: none; } /* Mobile menu hidden for simplicity, can be expanded */
+            .header .container { justify-content: center; }
+            .hero-content h1 { font-size: 36px; }
+            .special-content h2 { font-size: 36px; }
+            .reservation-form { grid-template-columns: 1fr; }
+            .reservation-form .btn { grid-column: span 1; }
+            .testimonials-grid, .blog-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .footer-bottom { flex-direction: column; text-align: center; gap: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-info">
+                <span><i class="fas fa-map-marker-alt"></i> 123 Food Street, Flavor Town, FT 56789</span>
+                <span><i class="fas fa-phone-alt"></i> (123) 456-7890</span>
+                <span><i class="fas fa-envelope"></i> info@festivark.com</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header / Navigation -->
+    <header class="header">
+        <div class="container">
+            <a href="#" class="logo">
+                Festivark
+                <span>RESTAURANT</span>
+            </a>
+            <nav class="nav-links">
+                <a href="#home" class="active">Home</a>
+                <a href="#about">About</a>
+                <a href="#menu">Menu</a>
+                <a href="#reservation">Reservations</a>
+                <a href="#blog">Blog</a>
+                <a href="#contact">Contact</a>
+            </nav>
+            <a href="#reservation" class="btn">Book a Table</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h3>The Best Place to Eat</h3>
+                <h1>Restaurant best taste</h1>
+                <p>We offer a variety of delicious dishes made from the freshest ingredients.</p>
+                <a href="#menu" class="btn">Explore Our Menu</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container about-grid">
+            <div class="about-img">
+                <img src="https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Restaurant Interior">
+            </div>
+            <div class="about-text">
+                <span>Welcome to Festivark</span>
+                <h2>Where Good Food Brings Great People Together</h2>
+                <p>At Festivark, we serve delicious meals made with fresh ingredients and a passion for great food. Join us for a wonderful dining experience that you will never forget.</p>
+                <div class="signature">
+                    <div class="signature-name">John Doe</div>
+                    <div class="signature-title">Head Chef</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Special Offer Section -->
+    <section class="special-offer">
+        <div class="container">
+            <div class="special-content">
+                <span>Today's Special</span>
+                <h2>Crispy Roasted Chicken</h2>
+                <p>Juicy roasted chicken served with herb butter, crispy fries, and seasonal vegetables.</p>
+                <button class="btn" onclick="orderSpecial()">Order Now</button>
+            </div>
+            <div class="price-badge">
+                <strong>$16.99</strong>
+                <span>Only</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section class="menu" id="menu">
+        <div class="container">
+            <div class="section-title">
+                <span>Our Menu</span>
+                <h2>Popular Dishes</h2>
+            </div>
+            <div class="menu-grid">
+                <!-- Dish 1 -->
+                <div class="menu-card" onclick="addToOrder('Creamy Pasta', 12.99)">
+                    <img src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Creamy Pasta">
+                    <div class="menu-card-body">
+                        <div class="menu-card-title">Creamy Pasta</div>
+                        <div class="menu-card-price">$12.99</div>
+                    </div>
+                </div>
+                <!-- Dish 2 -->
+                <div class="menu-card" onclick="addToOrder('Grilled Steak', 18.99)">
+                    <img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Grilled Steak">
+                    <div class="menu-card-body">
+                        <div class="menu-card-title">Grilled Steak</div>
+                        <div class="menu-card-price">$18.99</div>
+                    </div>
+                </div>
+                <!-- Dish 3 -->
+                <div class="menu-card" onclick="addToOrder('Chicken Soup', 7.99)">
+                    <img src="https://images.unsplash.com/photo-1547592166-23ac45744acd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Chicken Soup">
+                    <div class="menu-card-body">
+                        <div class="menu-card-title">Chicken Soup</div>
+                        <div class="menu-card-price">$7.99</div>
+                    </div>
+                </div>
+                <!-- Dish 4 -->
+                <div class="menu-card" onclick="addToOrder('Fried Shrimp', 13.99)">
+                    <img src="https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Fried Shrimp">
+                    <div class="menu-card-body">
+                        <div class="menu-card-title">Fried Shrimp</div>
+                        <div class="menu-card-price">$13.99</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reservation Section -->
+    <section class="reservation" id="reservation">
+        <div class="container reservation-grid">
+            <div class="reservation-text">
+                <span>Reservation</span>
+                <h2>Book Your Table Now</h2>
+                <p>Reserve your table and enjoy a great dining experience with your family and friends.</p>
+            </div>
+            <div class="reservation-form-wrapper">
+                <form class="reservation-form" onsubmit="event.preventDefault(); alert('Table booked successfully! We look forward to seeing you.');">
+                    <div class="form-group">
+                        <input type="date" required>
+                        <i class="far fa-calendar-alt"></i>
+                    </div>
+                    <div class="form-group">
+                        <input type="time" required>
+                        <i class="far fa-clock"></i>
+                    </div>
+                    <div class="form-group">
+                        <select required>
+                            <option value="" disabled selected>Select People</option>
+                            <option value="1">1 Person</option>
+                            <option value="2">2 People</option>
+                            <option value="3">3 People</option>
+                            <option value="4">4 People</option>
+                            <option value="5+">5+ People</option>
+                        </select>
+                        <i class="far fa-user"></i>
+                    </div>
+                    <button type="submit" class="btn">Book a Table</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container features-grid">
+            <div class="feature-item">
+                <i class="fas fa-medal"></i>
+                <h3>Quality Ingredients</h3>
+                <p>We use only the freshest and highest quality ingredients.</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-hat-chef"></i>
+                <h3>Experienced Chefs</h3>
+                <p>Our chefs have years of experience in creating delicious meals.</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-concierge-bell"></i>
+                <h3>Excellent Service</h3>
+                <p>We provide friendly and professional service for every guest.</p>
+            </div>
+            <div class="feature-item">
+                <i class="far fa-heart"></i>
+                <h3>Loved by Customers</h3>
+                <p>Our customers love us! Come and see why we are their favorite.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <span>Our Clients Say</span>
+                <h2>What Our Clients Say</h2>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p>"The best restaurant in town! Amazing food and great service."</p>
+                    <div class="client-name">- Sarah Johnson</div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p>"Every dish is delicious and the atmosphere is perfect."</p>
+                    <div class="client-name">- Michael Brown</div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p>"We love dining at Festivark. Highly recommended!"</p>
+                    <div class="client-name">- Emily Davis</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section class="blog" id="blog">
+        <div class="container">
+            <div class="section-title">
+                <span>From Our Blog</span>
+                <h2>Latest News & Articles</h2>
+            </div>
+            <div class="blog-grid">
+                <article class="blog-card" onclick="alert('Opening article...')">
+                    <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Healthy Food">
+                    <div class="blog-body">
+                        <h3>5 Reasons to Eat Healthy</h3>
+                        <p>Discover why eating healthy is important for your life.</p>
+                        <div class="blog-date">May 20, 2024</div>
+                    </div>
+                </article>
+                <article class="blog-card" onclick="alert('Opening article...')">
+                    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Summer Menu">
+                    <div class="blog-body">
+                        <h3>New Summer Menu Is Here</h3>
+                        <p>Check out our new and exciting summer menu.</p>
+                        <div class="blog-date">May 18, 2024</div>
+                    </div>
+                </article>
+                <article class="blog-card" onclick="alert('Opening article...')">
+                    <img src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Cooking Tips">
+                    <div class="blog-body">
+                        <h3>Cooking Tips from Our Chef</h3>
+                        <p>Learn some easy cooking tips from our head chef.</p>
+                        <div class="blog-date">May 15, 2024</div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">Festivark <span>RESTAURANT</span></div>
+                    <p>We are dedicated to serving delicious food and creating unforgettable dining experiences.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#menu">Menu</a></li>
+                        <li><a href="#reservation">Reservations</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Our Menu</h4>
+                    <ul>
+                        <li><a href="#menu">Appetizers</a></li>
+                        <li><a href="#menu">Main Courses</a></li>
+                        <li><a href="#menu">Desserts</a></li>
+                        <li><a href="#menu">Drinks</a></li>
+                        <li><a href="#menu">Specials</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Food Street, Flavor Town, FT 56789</li>
+                        <li><i class="fas fa-phone-alt"></i> (123) 456-7890</li>
+                        <li><i class="fas fa-envelope"></i> info@festivark.com</li>
+                        <li><i class="fas fa-globe"></i> www.festivark.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div>© 2024 Festivark Restaurant. All rights reserved.</div>
+                <div>Privacy Policy | Terms of Service</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Simple JavaScript for Interactions -->
+    <script>
+        // Smooth scroll for navigation links and setting active class
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    
+                    // Update active link
+                    document.querySelectorAll('.nav-links a').forEach(link => link.classList.remove('active'));
+                    if(this.closest('.nav-links')) {
+                        this.classList.add('active');
+                    }
+                }
+            });
+        });
+
+        // Functions for Buttons
+        function orderSpecial() {
+            alert('Crispy Roasted Chicken added to your order!');
+        }
+
+        function addToOrder(itemName, price) {
+            alert(itemName + ' ($' + price + ') added to your order!');
+        }
+    </script>
+</body>
+</html>
